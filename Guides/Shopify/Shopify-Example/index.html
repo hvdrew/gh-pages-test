@@ -274,9 +274,78 @@
       
     
     
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Google Ads Conversion Tracking
+      </label>
+    
     <a href="./" title="Google Ads Conversion Tracking" class="md-nav__link md-nav__link--active">
       Google Ads Conversion Tracking
     </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#overview" title="Overview" class="md-nav__link">
+    Overview
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#step-1-installing-the-gtag-base-code" title="Step 1 - Installing the Gtag Base Code" class="md-nav__link">
+    Step 1 - Installing the Gtag Base Code
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-2-installing-the-event-snippet" title="Step 2 - Installing the Event Snippet" class="md-nav__link">
+    Step 2 - Installing the Event Snippet
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#summary" title="Summary" class="md-nav__link">
+    Summary
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#references" title="References:" class="md-nav__link">
+    References:
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
     
   </li>
 
@@ -380,6 +449,62 @@
     
   
   
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#overview" title="Overview" class="md-nav__link">
+    Overview
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#step-1-installing-the-gtag-base-code" title="Step 1 - Installing the Gtag Base Code" class="md-nav__link">
+    Step 1 - Installing the Gtag Base Code
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-2-installing-the-event-snippet" title="Step 2 - Installing the Event Snippet" class="md-nav__link">
+    Step 2 - Installing the Event Snippet
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#summary" title="Summary" class="md-nav__link">
+    Summary
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#references" title="References:" class="md-nav__link">
+    References:
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -392,6 +517,78 @@
                 
                 
                 <h1 id="google-ads-conversion-tracking">Google Ads Conversion Tracking</h1>
+<p>This guide will walk you through configuring a Google Ads Gtag conversion for Shopify stores. This Conversion code will be configured to send revenue and the Order ID with each conversion.</p>
+<hr />
+<h2 id="overview">Overview</h2>
+<p>Setting up an AdWords conversion code requires a base Gtag to be installed on all pages, as well as an event snippet on the checkout success page. The following information is necessary before this setup can be completed:</p>
+<ul>
+<li>Google Ads Conversion ID (Account specific)</li>
+<li>Google Ads Conversion Label (Conversion Specific)</li>
+</ul>
+<p>The conversion ID can be found within the base Gtag snippet for the Google Ads account. The Event Snippet for the specific conversion contains all of the required information. The following snippet shows where to find both of these values in an Event Snippet (Labeled <code>CONVERSION_ID</code> and <code>CONVERSION_LABEL</code> respectively):</p>
+<pre><code class="html">&lt;script&gt;
+  gtag('event', 'conversion', {
+      'send_to': 'AW-CONVERSION_ID/CONVERSION_LABEL',
+      'value': 0,
+      'currency': 'USD',
+      'transaction_id': ''
+  });
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="step-1-installing-the-gtag-base-code">Step 1 - Installing the Gtag Base Code</h3>
+<p>To begin tracking conversions on a Shopify store, we must first configure a global site tag for our Google Ads account. If a Base Code was provided in the ticket, use that. You can also generate a new one with the template below, replacing the <code>CONVERSION_ID</code> value wherever it appears:</p>
+<pre><code class="html">&lt;script async src=&quot;https://www.googletagmanager.com/gtag/js?id=AW-CONVERSION_ID&quot;&gt;&lt;/script&gt;
+&lt;script&gt;
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'AW-CONVERSION_ID');
+&lt;/script&gt;
+</code></pre>
+
+<p>Once you have the Global Site Tag base code prepared you can install it by following these steps:</p>
+<ol>
+<li>Navigate to the <strong>Online Store</strong> section of the store</li>
+<li>Click <strong>Actions</strong> &gt; <strong>Edit Code</strong></li>
+<li>Open the <code>theme.liquid</code> file if it was not opened by default</li>
+<li>Paste the base code within the <code>&lt;head&gt;&lt;/head&gt;</code> sections of the template file</li>
+<li>Click <strong>Save</strong></li>
+</ol>
+<h3 id="step-2-installing-the-event-snippet">Step 2 - Installing the Event Snippet</h3>
+<p>Shopify does not use the <code>theme.liquid</code> file on the checkout pages, so we will need to add the base Gtag snippet a second time during this step. The Event Snippet will require some customization before it can be installed, so it will be easiest to extract the Conversion ID and Label from the event snippet provided. Once you have these values use them to populate the following template, replacing <code>CONVERSION_ID</code> and <code>CONVERSION_LABEL</code> wherever they appear:</p>
+<pre><code class="html">&lt;script async src=&quot;https://www.googletagmanager.com/gtag/js?id=AW-CONVERSION_ID&quot;&gt;&lt;/script&gt;
+&lt;script&gt;
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'AW-CONVERSION_ID');
+&lt;/script&gt;
+{% if first_time_accessed %}
+&lt;script&gt;
+  gtag('event', 'conversion', {
+      'send_to': 'AW-CONVERSION_ID/CONVERSION_LABEL',
+      'value': {{ subtotal_price | money_without_currency }},
+      'currency': 'USD',
+      'transaction_id': '{{ order_number }}'
+  });
+&lt;/script&gt;
+{% endif %}
+</code></pre>
+
+<p>Once you have this template prepared, install it by following these steps:</p>
+<ol>
+<li>Click <strong>Settings</strong> in the Shopify store</li>
+<li>Click <strong>Checkout</strong></li>
+<li>Scroll down the page until you find a text box labeled <strong>Additional Scripts</strong></li>
+<li>Paste the populated template in the <strong>Additional Scripts</strong> section</li>
+<li>Click <strong>Save</strong></li>
+</ol>
+<hr />
+<h2 id="summary">Summary</h2>
+<p>This concludes the setup for Google Ads conversion tracking on Shopify stores. While we can't test purchase based conversions, you <em>can</em> test the frontend of the site to ensure that the Gtag base code was added to all pages using Tag Assistant.</p>
+<h4 id="references">References:</h4>
+<p><a href="https://help.shopify.com/en/manual/promoting-marketing/analyze-marketing/tracking-adwords-conversions">Google Ads Conversion Tracking - Shopify Guide</a></p>
                 
                   
                 
